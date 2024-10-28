@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real-time Chat App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="auth-container">
+      <div id="login-form" class="auth-form">
+        <h2>Login</h2>
+        <input type="text" id="login-username" placeholder="Username" />
+        <input type="password" id="login-password" placeholder="Password" />
+        <button onclick="login()">Login</button>
+        <p>
+          Don't have an account?
+          <a href="#" onclick="toggleForms()">Register</a>
+        </p>
+      </div>
+
+      <div id="register-form" class="auth-form hidden">
+        <h2>Register</h2>
+        <input type="text" id="register-username" placeholder="Username" />
+        <input type="password" id="register-password" placeholder="Password" />
+        <button onclick="register()">Register</button>
+        <p>
+          Already have an account? <a href="#" onclick="toggleForms()">Login</a>
+        </p>
+      </div>
+    </div>
+
+    <div id="chat-container" class="hidden">
+      <div id="rooms">
+        <h3>Chat Rooms</h3>
+        <button onclick="joinRoom('Main Groupchat')">Main Groupchat</button>
+        <button onclick="joinRoom('Minecraft')">Minecraft</button>
+        <button onclick="logout()">Logout</button>
+      </div>
+      <div id="chat">
+        <div id="current-room-label">No Room Selected</div>
+        <div id="messages"></div>
+        <div id="input-area">
+          <div class="message-controls">
+            <div class="emoji-container">
+              <button onclick="toggleEmojiPanel()" class="control-button">
+                😊
+              </button>
+              <div id="emoji-panel" class="emoji-panel hidden">
+                <button onclick="addEmoji('😊')">😊</button>
+                <button onclick="addEmoji('😂')">😂</button>
+                <button onclick="addEmoji('❤️')">❤️</button>
+                <button onclick="addEmoji('👍')">👍</button>
+                <button onclick="addEmoji('🎉')">🎉</button>
+                <button onclick="addEmoji('🔥')">🔥</button>
+              </div>
+            </div>
+
+            <input
+              type="text"
+              id="message-input"
+              placeholder="Type a message..."
+            />
+            <label for="file-input" class="file-label">
+              📎
+              <input type="file" id="file-input" class="hidden" />
+            </label>
+            <button onclick="sendMessage()" class="send-button">Send</button>
+          </div>
+          <div id="file-preview" class="hidden">
+            <span id="file-name"></span>
+            <button onclick="clearFileSelection()">×</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
